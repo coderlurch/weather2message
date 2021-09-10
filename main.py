@@ -1,11 +1,22 @@
+import requests
+from datetime import datetime, timedelta
 import weather
-from datetime import datetime
+import message
+from personal_data import contact_data, motion_profile
 
-MY_LAT = 51.214986 # Your latitude
-MY_LONG = 6.804756 # Your longitude
+tmrw = datetime.now() + timedelta(days=1)
+is_weekday_tmrw = True#tmrw.weekday() in range(5)
 
-test_coordinates = {"lat":MY_LAT,"lon":MY_LONG}
-test_date = datetime.now()
-
-test = weather.Weather(test_coordinates,test_date)
-print(test.parse_data(hours=0))
+if is_weekday_tmrw:
+    for contact in contact_data.keys():
+        weather_message = f"Hallo {contact}! \n"
+        try:
+            times = motion_profile[contact]["Weekday"]
+        except AttributeError:
+            times = motion_profile[contact][tmrw.weekday()]
+        for time in times.keys():
+            tmrw = tmrw.replace(hour=time, minute=0)
+            location = times[time]
+            weather_temp = weather.Weather(location, tmrw)
+            weather_message = weather_message + weather_temp.report() + "\n"
+        message.send_message(weather_message, contact_data[contact])

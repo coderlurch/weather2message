@@ -25,9 +25,9 @@ def send_message(text, number):
                              password=MY_EMAIL_PW)
             connection.sendmail(from_addr=MY_EMAIL,
                                 to_addrs=MY_EMAIL,
-                                msg=f'Subject: Twilio message failed to {number} \n\n '
-                                    f'exception: {e}'
-                                    f'message text: {text}')
+                                msg=f"Subject: Twilio message failed to {number} \n\n "\
+                                    f"exception: {e}"\
+                                    f"message text: {text}")
     else:
         with smtplib.SMTP("smtp.gmail.com") as connection:
             connection.starttls()
@@ -35,7 +35,7 @@ def send_message(text, number):
                              password=MY_EMAIL_PW)
             connection.sendmail(from_addr=MY_EMAIL,
                                 to_addrs=MY_EMAIL,
-                                msg=f'Subject: Twilio message sent to {number} \n\n'
-                                    f'date created: {message.date_created} \n\n'
-                                    f'message status: {message.status} \n\n'
-                                    f'message text: {text}')
+                                msg=f"Subject: Twilio message sent to {number} \n\n"\
+                                    f"date created: {message.date_created} \n\n"\
+                                    f"message status: {message.status} \n\n"\
+                                    "message text: \n\n" + text)
