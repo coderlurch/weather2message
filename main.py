@@ -1,11 +1,10 @@
-import requests
 from datetime import datetime, timedelta
 import weather
 import message
 from personal_data import contact_data, motion_profile
 
 tmrw = datetime.now() + timedelta(days=1)
-is_weekday_tmrw = True#tmrw.weekday() in range(5)
+is_weekday_tmrw = tmrw.weekday() in range(5)
 
 if is_weekday_tmrw:
     for contact in contact_data.keys():

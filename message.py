@@ -1,6 +1,5 @@
 import os
 from twilio.rest import Client
-from twilio.base.exceptions import TwilioRestException
 import smtplib
 
 TWILIO_ACOOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID')
