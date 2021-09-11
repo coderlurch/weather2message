@@ -9,7 +9,7 @@ is_weekday_tmrw = True#tmrw.weekday() in range(5)
 
 if is_weekday_tmrw:
     for contact in contact_data.keys():
-        weather_message = f"Hallo {contact}! \n"
+        weather_message = f"Hallo {contact}! \n\n"
         try:
             times = motion_profile[contact]["Weekday"]
         except AttributeError:

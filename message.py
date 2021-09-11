@@ -23,19 +23,21 @@ def send_message(text, number):
             connection.starttls()
             connection.login(user=MY_EMAIL,
                              password=MY_EMAIL_PW)
+            msg = f"Subject: Twilio message failed to {number} \n\n " \
+                  f"exception: {e}" \
+                  "message text: \n\n" + text
             connection.sendmail(from_addr=MY_EMAIL,
                                 to_addrs=MY_EMAIL,
-                                msg=f"Subject: Twilio message failed to {number} \n\n "\
-                                    f"exception: {e}"\
-                                    f"message text: {text}")
+                                msg=msg.encode("utf8"))
     else:
         with smtplib.SMTP("smtp.gmail.com") as connection:
             connection.starttls()
             connection.login(user=MY_EMAIL,
                              password=MY_EMAIL_PW)
+            msg = f"Subject: Twilio message sent to {number} \n\n " \
+                  f"date created: {message.date_created} \n\n" \
+                  f"message status: {message.status} \n\n" \
+                  "message text: \n\n" + text
             connection.sendmail(from_addr=MY_EMAIL,
                                 to_addrs=MY_EMAIL,
-                                msg=f"Subject: Twilio message sent to {number} \n\n"\
-                                    f"date created: {message.date_created} \n\n"\
-                                    f"message status: {message.status} \n\n"\
-                                    "message text: \n\n" + text)
+                                msg=msg.encode("utf8"))

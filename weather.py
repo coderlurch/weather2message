@@ -96,7 +96,7 @@ class Weather:
                  f" und {hwd['precipitation']} {self.UNITS['precipitation']} Niederschlag geben."\
                  f" Die Sonne wird {hwd['sunshine']} {self.UNITS['sunshine']} pro Stunde scheinen."\
                  f" Es wird {hwd['wind_speed']} {self.UNITS['wind speed']} Wind geben"\
-                 f" und zu {hwd['cloud_cover']} {self.UNITS['cloud cover']} bewölkt sein."\
+                 f" und zu {hwd['cloud_cover']} {self.UNITS['cloud cover']} bewölkt sein. \n\n"\
 
         return report
 
