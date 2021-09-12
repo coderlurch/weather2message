@@ -12,7 +12,7 @@ if is_weekday_tmrw:
         try:
             if tmrw.date().isocalendar()[1]%2 == 0:
                 valid_motion_data = personal_motion_data["even"]
-            elif tmrw.date().isocalendar()[1]% 2 != 0:
+            else:
                 valid_motion_data = personal_motion_data["odd"]
         except KeyError:
             valid_motion_data = personal_motion_data["general"]
