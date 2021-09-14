@@ -10,9 +10,8 @@ MY_EMAIL_PW = os.environ.get('MY_EMAIL_PW')
 
 
 def send_message(text, number):
-    client = Client(TWILIO_ACOOUNT_SID, TWILIO_AUTH_TOKEN)
-
     try:
+        client = Client(TWILIO_ACOOUNT_SID, TWILIO_AUTH_TOKEN)
         message = client.api.account.messages.create(
             from_=TWILIO_NUMBER,
             to=number,
