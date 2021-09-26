@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta
 import socket
-import emoji
 import weather
 import message
 from personal_data import contact_data, motion_profile
