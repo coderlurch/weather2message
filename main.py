@@ -8,7 +8,7 @@ from personal_data import contact_data, motion_profile
 from flask import Flask
 app = Flask(__name__)
 
-tmrw = datetime.now() + timedelta(days=3)
+tmrw = datetime.now() + timedelta(days=1)
 is_weekday_tmrw = tmrw.weekday() in range(5)
 
 
