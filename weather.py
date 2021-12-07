@@ -1,6 +1,7 @@
 import requests
 from datetime import datetime, timedelta
 
+
 class Weather:
 
     def __init__(self,city, start_date, hours=1):
@@ -24,6 +25,10 @@ class Weather:
             "wind speed": "km / h",
             "wind gust direction": "°",
             "wind gust speed": "km / h"
+        }
+
+        self.CATEGORIES = {
+
         }
 
     def city_to_OSM_data(self,city):
@@ -80,23 +85,27 @@ class Weather:
         :param hours:
         :return:
         """
-        translate_condition = {"dry":"trocken",
-                               "fog":"neblig",
-                               "rain":"regnerisch",
-                               "sleet":"Schneeregen geben",
-                               "snow":"schneien",
-                               "hail":"hageln",
-                               "thunderstorm":"gewittrig"
+        translate_condition = {"clear-day": "klar",
+                               "clear-night": "klar",
+                               "partly-cloudy-day": "teilweise bewölkt",
+                               "partly-cloudy-night": "teilweise bewölkt",
+                               "cloudy": "bewölkt",
+                               "fog": "neblig",
+                               "rain": "regnerisch",
+                               "sleet": "Schneeregen geben",
+                               "snow": "schneien",
+                               "hail": "hageln",
+                               "thunderstorm": "gewittrig"
                                }
         hwd = self.parse_data(hours)
         timestamp_dt = datetime.fromisoformat(hwd['timestamp'])
-        report = f"Am {timestamp_dt.date().strftime('%d. %B %Y')} um {timestamp_dt.time()} Uhr"\
-                 f" wird es in {self.city} {translate_condition[hwd['condition']]} werden."\
-                 f" Es wird {hwd['temperature']} {self.UNITS['temperature']} warm werden"\
-                 f" und {hwd['precipitation']} {self.UNITS['precipitation']} Niederschlag geben."\
-                 f" Die Sonne wird {hwd['sunshine']} {self.UNITS['sunshine']} pro Stunde scheinen."\
-                 f" Es wird {hwd['wind_speed']} {self.UNITS['wind speed']} Wind geben"\
-                 f" und zu {hwd['cloud_cover']} {self.UNITS['cloud cover']} bewölkt sein. \n\n"\
+        report = f"Am {timestamp_dt.date().strftime('%d. %B %Y')} um {timestamp_dt.time()} Uhr" \
+                 f" ist es in {self.city} {translate_condition[hwd['icon']]}: \n" \
+                 f"Es ist {hwd['temperature']} {self.UNITS['temperature']} warm " \
+                 f"und es gibt {hwd['precipitation']} {self.UNITS['precipitation']} Niederschlag. \n" \
+                 f"Die Sonne scheint {hwd['sunshine']} {self.UNITS['sunshine']} pro Stunde. \n" \
+                 f"Der Wind weht mit {hwd['wind_speed']} {self.UNITS['wind speed']} " \
+                 f"und es ist zu {hwd['cloud_cover']} {self.UNITS['cloud cover']} bewölkt. \n\n"
 
         return report
 
